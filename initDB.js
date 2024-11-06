@@ -21,9 +21,11 @@ async function initProducts() {
     console.log(`Deleted ${ deleteResult.deletedCount} product.`)
     // create initial products
     const insertResult = await Product.insertMany([
-        { name: 'gloves', price: 10000,},
-        { name: 'dildo', price: 500,},
-        { name: 'car', price: 1500, }
+        { name: 'gloves', price: 10000, owner: "Manu"},
+        { name: 'dildo', price: 50, owner: "Rober"},
+        { name: 'car', price: 1500, owner: "Mila"},
+        { name: 'computer', price: 2000, owner: "Sapo"},
+
     ])
     console.log(`Created ${ insertResult.length } product.`) 
 }
