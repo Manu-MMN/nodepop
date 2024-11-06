@@ -4,7 +4,7 @@ import createError from 'http-errors'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 
-import indexRouter from './routes/index.js'
+import indexrouter from './routes/index.js'
 import usersRouter from './routes/users.js'
 import connectMongoose from './lib/conect-mongoose.js'; // Importar la función de conexión
 // Importar el modelo de producto
@@ -33,7 +33,7 @@ app.use(express.static(join(import.meta.dirname, 'public')))
 // Routing
 
 // homepage
-app.use('/', indexRouter)
+app.use('/', indexrouter)
 // user page
 app.use('/users', usersRouter)
 
