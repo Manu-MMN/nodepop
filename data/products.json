@@ -1,0 +1,22 @@
+[
+    { "name": "Laptop", "price": 500, "image": "laptop.jpg", "tags": ["work", "mobile"] },
+    { "name": "Bicicleta", "price": 150, "image": "bike.jpg", "tags": ["lifestyle", "motor"] },
+    { "name": "Smartphone", "price": 300, "image": "smartphone.jpg", "tags": ["mobile"] },
+    { "name": "Monitor", "price": 200, "image": "monitor.jpg", "tags": ["work"] },
+    { "name": "Coche", "price": 5000, "image": "car.jpg", "tags": ["motor"] },
+    { "name": "Motocicleta", "price": 1500, "image": "motorcycle.jpg", "tags": ["motor"] },
+    { "name": "Tablet", "price": 250, "image": "tablet.jpg", "tags": ["mobile", "work"] },
+    { "name": "Cámara", "price": 350, "image": "camera.jpg", "tags": ["lifestyle"] },
+    { "name": "Silla de oficina", "price": 100, "image": "office-chair.jpg", "tags": ["work"] },
+    { "name": "Batería portátil", "price": 20, "image": "power-bank.jpg", "tags": ["mobile"] },
+    { "name": "Smartwatch", "price": 150, "image": "smartwatch.jpg", "tags": ["mobile", "lifestyle"] },
+    { "name": "Televisor", "price": 600, "image": "tv.jpg", "tags": ["lifestyle"] },
+    { "name": "Bicicleta de montaña", "price": 800, "image": "mountain-bike.jpg", "tags": ["lifestyle", "motor"] },
+    { "name": "Escritorio", "price": 120, "image": "desk.jpg", "tags": ["work"] },
+    { "name": "Altavoz Bluetooth", "price": 50, "image": "bluetooth-speaker.jpg", "tags": ["lifestyle"] },
+    { "name": "Cargador inalámbrico", "price": 30, "image": "wireless-charger.jpg", "tags": ["mobile"] },
+    { "name": "Zapatillas deportivas", "price": 80, "image": "sports-shoes.jpg", "tags": ["lifestyle"] },
+    { "name": "Bolso de viaje", "price": 60, "image": "travel-bag.jpg", "tags": ["lifestyle"] },
+    { "name": "Auriculares", "price": 40, "image": "headphones.jpg", "tags": ["lifestyle", "mobile"] },
+    { "name": "Impresora", "price": 150, "image": "printer.jpg", "tags": ["work"] }
+  ]

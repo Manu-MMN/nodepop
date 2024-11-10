@@ -1,13 +1,13 @@
-import mongoose, { Schema } from 'mongoose'
+import mongoose from 'mongoose'
 
 // definir el esquema de los items
-const productSchema = new Schema({
-  name: { type: String, unique: true },
-  price: { type: Number, min: 0.001 },
-  owner: {type: String, unique: true}
-}, {
-  // collection: 'productos' // para forzar el nombre de la colección y evitar pluralización
-})
+const productSchema = mongoose.Schema({
+  name: String,
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  price: Number,
+  image: String,
+  tags: [String],
+});
 
 // creamos el modelo de Productos
 const Product = mongoose.model('Product', productSchema)

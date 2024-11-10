@@ -12,14 +12,14 @@ export const login = async (req, res, next) => {
         }
 
         // Comparar la contraseña
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = password === user.password;
         if (!isMatch) {
             return res.status(401).send('Contraseña incorrecta');
         }
 
         // Guardar el usuario en la sesión (si estás usando sesiones)
-        req.session.user = user;
-        res.redirect('/'); // Redirigir a la página principal o la deseada
+        req.session.userId = user._id;
+        res.json({ message: 'Inicio de sesión exitoso' }); // Redirigir a la página principal o la deseada
     } catch (error) {
         next(error);
     }

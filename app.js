@@ -3,9 +3,11 @@ import express from 'express'
 import createError from 'http-errors'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
+import session from 'express-session'
 
 import indexrouter from './routes/index.js'
 import usersRouter from './routes/users.js'
+import productRouter from './routes/products.js'
 import connectMongoose from './lib/conect-mongoose.js'; // Importar la función de conexión
 // Importar el modelo de producto
 await connectMongoose()
@@ -30,12 +32,20 @@ app.use(cookieParser())
 // set the folder where statis resources will be served
 app.use(express.static(join(import.meta.dirname, 'public')))
 
+app.use(session({
+  secret: 'mi_clave_secreta',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
 // Routing
 
 // homepage
 app.use('/', indexrouter)
 // user page
-app.use('/users', usersRouter)
+app.use('', usersRouter)
+
+app.use('/products', productRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
