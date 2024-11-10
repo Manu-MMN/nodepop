@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
 
-// definir el esquema de los agentes
+// definir el esquema de los items
 const productSchema = new Schema({
   name: { type: String, unique: true },
   price: { type: Number, min: 0.001 },
