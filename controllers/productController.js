@@ -1,12 +1,8 @@
 import Product from '../models/Items.js';
 
 export async function createProduct(req, res) {
-    try {
-      const userId = req.session.userId;
-      if (!userId) {
-        return res.status(401).json({ message: 'No has iniciado sesión' });
-      }
   
+    try {  
       const { name, price, image, tags } = req.body;
   
       // Validar que los tags sean válidos
@@ -19,7 +15,7 @@ export async function createProduct(req, res) {
       // Crear el producto con el owner asignado
       const newProduct = new Product({
         name,
-        owner: userId, // Asignar el ID del usuario autenticado como propietario
+        owner: req.user._id, // Asignar el ID del usuario autenticado como propietario
         price,
         image,
         tags,
@@ -39,11 +35,8 @@ export async function listProducts(req, res) {
     // {}
 
     // Filtrar solo los productos del usuario autenticado
-    const userId = req.session.userId;
-    if (!userId) {
-      return res.status(401).json({ message: 'No has iniciado sesión' });
-    }
-    filters.owner = userId;
+    
+    filters.owner = req.user._id;
     // {owner: 6730cbec6f6c53c14b842ff6 }
 
     // Filtrar por tag
@@ -78,10 +71,6 @@ export async function listProducts(req, res) {
 
 export async function deleteProduct(req, res) {
     try {
-      const userId = req.session.userId;
-      if (!userId) {
-        return res.status(401).json({ message: 'No has iniciado sesión' });
-      }
   
       const productId = req.params.id;
   
@@ -90,8 +79,8 @@ export async function deleteProduct(req, res) {
       if (!product) {
         return res.status(404).json({ message: 'Producto no encontrado' });
       }
-  
-      if (product.owner.toString() !== userId) {
+      // comprobamos si el usuario es el propietario
+      if (product.owner.toString() !== req.user._id) {
         return res.status(403).json({ message: 'No tienes permiso para eliminar este producto' });
       }
   
@@ -105,10 +94,6 @@ export async function deleteProduct(req, res) {
   }
   export async function   getProduct(req, res) {
     try {
-      const userId = req.session.userId;
-      if (!userId) {
-        return res.status(401).json({ message: 'No has iniciado sesión' });
-      }
   
       const productId = req.params.id;
   
@@ -119,7 +104,7 @@ export async function deleteProduct(req, res) {
       }
   
       // Verificar si el usuario autenticado es el propietario
-      if (product.owner.toString() !== userId) {
+      if (product.owner.toString() !== req.user._id) {
         return res.status(403).json({ message: 'No tienes permiso para ver este producto' });
       }
   
@@ -169,5 +154,43 @@ export async function deleteProduct(req, res) {
     } catch (error) {
       res.status(500).json({ error: 'Error al obtener la lista de productos' });
     }
+  }
+
+
+  export async function updateProduct(req, res, next){
+      try {
+        const productId = req.params.id;
+        const productData = req.body;
+
+        //comprobamos si el producto existe
+        const product = await Product.findById(productId)
+        if (!product) {
+          return res.status(404).json({
+            message: "Producto no encontrado"
+          })
+        }
+      
+        //comprobamos si el usuario es el propietario del producto
+        if (product.owner.toString() !== req.user._id ) {
+          console.log(req.user.id)
+          return res.status(403).json({
+            message: "No tienes permiso para actualizar este producto"
+          })
+        }
+
+        // Actualizamos el producto
+
+        const updateThisProduct = await Product.findByIdAndUpdate(productId, productData, {
+          new: true
+        })
+
+        res.json({
+          message: "Producto actualizado con éxito!",
+          result: updateThisProduct
+        })
+
+      } catch (error) {
+        res.status(500).json({ error: "Error al actualizar el producto"})
+      }
   }
 

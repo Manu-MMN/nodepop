@@ -1,4 +1,5 @@
 import User from '../models/Usuario.js'; // Asegúrate de que la ruta sea correcta
+import jwt from "jsonwebtoken"
 import bcrypt from 'bcrypt';
 
 // Función de autenticación
@@ -18,8 +19,17 @@ export const login = async (req, res, next) => {
         }
 
         // Guardar el usuario en la sesión (si estás usando sesiones)
-        req.session.userId = user._id;
-        res.json({ message: 'Inicio de sesión exitoso' }); // Redirigir a la página principal o la deseada
+        const jwtSecret = process.env.JWT_SECRET
+        console.log(jwtSecret)
+        jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+            expiresIn: "4d"
+        }, (err, tokenJWT) => {    //con este callback lo hacemos asíncrono
+            if (err) {
+                next(err)
+                return
+            }
+            res.json({ tokenJWT })
+        })
     } catch (error) {
         next(error);
     }

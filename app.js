@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import { join } from 'node:path'
 import express from 'express'
 import createError from 'http-errors'
