@@ -27,11 +27,13 @@ app.use(logger('dev'))
 // transforms json objects into js objects
 app.use(express.json())
 // transforms data sent by a form to a js object
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 // cookie parser to get cookies from client
 app.use(cookieParser())
 // set the folder where statis resources will be served
 app.use(express.static(join(import.meta.dirname, 'public')))
+
+//configuración de sesiones
 
 app.use(session({
   secret: 'mi_clave_secreta',
@@ -39,9 +41,20 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: false }
 }));
+
+// middleware para las variables globales en vistas
+
+app.use((req, res, next)=>{
+  res.locals.appName = "Nodepop";
+  res.locals.session = req.session;  // así session estará disponible en las vistas
+  next();
+})
+
 // Routing
 
 // homepage
+
+
 app.use('/', indexrouter)
 // user page
 app.use('', usersRouter)

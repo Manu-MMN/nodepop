@@ -1,21 +1,39 @@
-import User from '../models/Usuario.js'; // Asegúrate de que la ruta sea correcta
-import jwt from "jsonwebtoken"
+import User from '../models/Usuario.js'; 
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
+
+//funcion para mostrar el formulario de login
+
+export const showLoginForm = (req, res) => {
+    const email = req.body.email || req.body.username;
+    res.render('login', { email, error: null }); 
+    console.log("primer email", email)
+};
 
 // Función de autenticación
 export const login = async (req, res, next) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
+    console.log("body recibido", req.body)
     try {
+        console.log("EMAIL", email)
+        console.log("PASSWORD", password)
+
         // Buscar al usuario en la base de datos
-        const user = await User.findOne({ username });
+        const user = await User.findOne({ email });
+        console.log("Usuario encontrado:", user);
         if (!user) {
             return res.status(401).send('Usuario no encontrado');
         }
 
         // Comparar la contraseña
         const isMatch = password === user.password;
+        console.log("Email", email)
+        console.log("Password", password)
+
         if (!isMatch) {
             return res.status(401).send('Contraseña incorrecta');
+         
         }
 
         // Guardar el usuario en la sesión (si estás usando sesiones)
