@@ -16,6 +16,7 @@ console.log("conectado a mongoDB")
 
 const app = express()
 
+
 // view engine setup
 app.set('views', join(import.meta.dirname, 'views'))
 app.set('view engine', 'ejs')
@@ -57,7 +58,7 @@ app.use((req, res, next)=>{
 
 app.use('/', indexrouter)
 // user page
-app.use('', usersRouter)
+app.use('/', usersRouter)
 
 app.use('/products', productRouter)
 
