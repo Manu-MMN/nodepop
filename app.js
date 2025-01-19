@@ -11,7 +11,7 @@ import usersRouter from './routes/users.js'
 import productRouter from './routes/products.js'
 import connectMongoose from './lib/conect-mongoose.js'; // Importar la función de conexión
 import i18n from "./lib/i18nConfigure.js"
-
+import * as languageController from "./controllers/languageController.js"
 
 
 // Importar el modelo de producto
@@ -21,7 +21,6 @@ console.log("conectado a mongoDB")
 const app = express()
 
 
-app.use(i18n.init)
 
 
 // view engine setup
@@ -34,13 +33,15 @@ app.set('view engine', 'ejs')
 app.use(logger('dev'))
 // transforms json objects into js objects
 app.use(express.json())
-// transforms data sent by a form to a js object
-app.use(express.urlencoded({ extended: true }))
 // cookie parser to get cookies from client
 app.use(cookieParser())
+// transforms data sent by a form to a js object
+app.use(express.urlencoded({ extended: true }))
 // set the folder where statis resources will be served
 app.use(express.static(join(import.meta.dirname, 'public')))
 
+app.use(i18n.init)
+app.get("/change-locale/:locale", languageController.changeLocale)
 //configuración de sesiones
 
 app.use(session({
