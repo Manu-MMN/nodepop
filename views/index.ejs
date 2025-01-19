@@ -1,0 +1,26 @@
+<%- include('header.ejs') %>
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <h2><%= __("Product List") %></h2>
+    <% if (products.length > 0) { %>
+      <ul>
+        <% products.forEach(function(product) { %>
+          <li>
+            <strong><%= __("Name:") %></strong> <%= product.name %> <br>
+            <strong><%= __("Price:") %></strong> <%= product.price %> € <br>
+            <strong><%= __("Owner:") %></strong> <%= product.owner %> <br>
+          </li>
+        <% }); %>
+      </ul>
+    <% } else { %>
+      <p>No hay productos disponibles en este momento.</p>
+    <% } %>
+
