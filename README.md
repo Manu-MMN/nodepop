@@ -70,7 +70,7 @@ La aplicación permite subir imágenes para los productos a través de un formul
 
 - **POST /products**  
   Crea un nuevo producto para el usuario autenticado.
-  En postman, al introducir los tags en el form dara, tendrá que ser separados por coma y sin espacio
+  Al usar postman, para introducir los tags en el form dara, tendrá que ser separados por coma y sin espacio
 
   - **Body JSON:**
     ```json
