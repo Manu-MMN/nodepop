@@ -4,20 +4,26 @@ export async function createProduct(req, res) {
   
     try {  
       const { name, price, image, tags } = req.body;
-  
+      
       // Validar que los tags sean válidos
       const validTags = ['work', 'lifestyle', 'motor', 'mobile'];
-      const areTagsValid = tags.every(tag => validTags.includes(tag));
+      const tagsArray = typeof tags === "string" ? tags.split(","): tags;
+      //si el tipo de tags viene como string, se separa por comas, si no es un string, será array
+      const areTagsValid = tagsArray.every(tag => validTags.includes(tag));
       if (!areTagsValid) {
         return res.status(400).json({ message: 'Uno o más tags no son válidos' });
       }
-  
+      console.log("aquí está el tema", req.file)
+      console.log("aquí esta el body", req.body)
+      if (!req.body) {
+        return res.status(400).json({ error: "no se ha subido ningún archivo"})
+      }
       // Crear el producto con el owner asignado
       const newProduct = new Product({
         name,
         owner: req.user._id, // Asignar el ID del usuario autenticado como propietario
         price,
-        image,
+        image: req.file?.filename || null,
         tags,
       });
   
@@ -25,6 +31,7 @@ export async function createProduct(req, res) {
       res.status(201).json({ message: 'Producto creado exitosamente', product: newProduct });
   
     } catch (error) {
+      console.log("ERROR STRIN",JSON.stringify(error))
       res.status(500).json({ error: 'Error al crear el producto' });
     }
   }

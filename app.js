@@ -10,6 +10,9 @@ import indexrouter from './routes/index.js'
 import usersRouter from './routes/users.js'
 import productRouter from './routes/products.js'
 import connectMongoose from './lib/conect-mongoose.js'; // Importar la función de conexión
+
+
+
 // Importar el modelo de producto
 await connectMongoose()
 console.log("conectado a mongoDB")
