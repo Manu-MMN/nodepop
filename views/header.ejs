@@ -20,6 +20,11 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
+<li class="nav-item">
+  <% if (session.userId) { %> <!-- Muestra el enlace solo si el usuario está logado -->
+    <a class="nav-link" href="/products/new"><%= __('New Product') %></a>
+  <% } %>
+</li>
           <li class="nav-item">
             <!-- <a class="nav-link" href="/redoc-static.html" target="_blank">API Documentation</a> -->
           </li>
