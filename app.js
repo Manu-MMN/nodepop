@@ -69,8 +69,11 @@ app.use('/', indexrouter)
 app.use('/', usersRouter)
 
 app.use('/products', productRouter)
+<<<<<<< HEAD
 app.use('/products/new', productRouter);
 
+=======
+>>>>>>> cb91da137997817af38a4fb9e2de9dd422fcf2e9
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

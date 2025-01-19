@@ -15,17 +15,26 @@ Nodepop es una aplicación de compraventa de artículos de segunda mano. Utiliza
 1. Inicia el servidor en modo desarrollo ejecutando `npm run start:dev` o, en modo producción, ejecuta `npm start`.
 2. Abre el navegador o Postman y dirígete a `http://localhost:4444/`.
 
+<<<<<<< HEAD
 ## Funcionalidades destacadas
 
 ### Autenticación con JWT
 - **POST /login**  
   Los usuarios pueden iniciar sesión enviando sus credenciales. En la respuesta exitosa, el servidor devuelve un token JWT que debe incluirse en las cabeceras para acceder a los endpoints protegidos.
+=======
+## Endpoints
+
+### Autenticación
+- **POST /login**  
+  Permite que los usuarios inicien sesión enviando sus credenciales.
+>>>>>>> cb91da137997817af38a4fb9e2de9dd422fcf2e9
   - **Body JSON:**
     ```json
     { "email": "user@example.com", "password": "password" }
     ```
   - **Respuesta exitosa:**
     ```json
+<<<<<<< HEAD
     { "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." }
     ```
   - El token debe enviarse en las cabeceras de las solicitudes protegidas como:
@@ -56,6 +65,13 @@ La aplicación permite subir imágenes para los productos a través de un formul
     ```json
     { "email": "user@example.com", "password": "password" }
     ```
+=======
+    { "message": "Inicio de sesión exitoso" }
+    ```
+
+- **GET /logout**  
+  Cierra la sesión actual del usuario.
+>>>>>>> cb91da137997817af38a4fb9e2de9dd422fcf2e9
 
 ### Productos
 - **GET /products**  
@@ -70,12 +86,16 @@ La aplicación permite subir imágenes para los productos a través de un formul
 
 - **POST /products**  
   Crea un nuevo producto para el usuario autenticado.
+<<<<<<< HEAD
   Al usar postman, para introducir los tags en el form dara, tendrá que ser separados por coma y sin espacio
 
+=======
+>>>>>>> cb91da137997817af38a4fb9e2de9dd422fcf2e9
   - **Body JSON:**
     ```json
     { "name": "Laptop", "price": 500, "image": "laptop.jpg", "tags": ["work", "mobile"] }
     ```
+<<<<<<< HEAD
   - Si se sube una imagen, utiliza `form-data` con los campos:
     - `name`: Nombre del producto.
     - `price`: Precio del producto.
@@ -84,21 +104,38 @@ La aplicación permite subir imágenes para los productos a través de un formul
   - **Respuesta exitosa:**
     ```json
     { "message": "Producto creado exitosamente", "product": { "_id": "601a1f8e8f1b2a0017a6a8f1", "name": "Laptop", "price": 500, "image": "/uploads/laptop.jpg", "tags": ["work", "mobile"] } }
+=======
+  - **Respuesta exitosa:**
+    ```json
+    { "message": "Producto creado exitosamente", "product": { "_id": "601a1f8e8f1b2a0017a6a8f1", "name": "Laptop", "owner": "6730cbec6f6c53c14b842ffa", "price": 500, "image": "laptop.jpg", "tags": ["work", "mobile"] } }
+>>>>>>> cb91da137997817af38a4fb9e2de9dd422fcf2e9
     ```
 
 - **DELETE /products/:id**  
   Elimina un producto específico del usuario autenticado.
+<<<<<<< HEAD
   - **Parámetro de ruta:** `id` (ID del producto).
 
 - **GET /products/:id**  
   Muestra los detalles de un producto específico si el usuario autenticado es el propietario.
   - **Parámetro de ruta:** `id` (ID del producto).
+=======
+  - **Parámetro de ruta:** `id` (ID del producto)
+
+- **GET /products/:id**  
+  Muestra los detalles de un producto específico si el usuario autenticado es el propietario.
+  - **Parámetro de ruta:** `id` (ID del producto)
+>>>>>>> cb91da137997817af38a4fb9e2de9dd422fcf2e9
 
 - **GET /products/page/ui**  
   Muestra la página de inicio con la lista de productos renderizada con EJS. Se pueden aplicar filtros, paginación y ordenación usando query params.
 
 ## Notas
+<<<<<<< HEAD
 - La aplicación utiliza **JWT** para el manejo de autenticación.
 - Las imágenes subidas se almacenan en la carpeta `/uploads`, que debe ser creada si no existe.
 - Se incluyen traducciones dinámicas para mejorar la experiencia del usuario.
+=======
+- La aplicación utiliza sesiones (sessions) para el manejo de autenticación.
+>>>>>>> cb91da137997817af38a4fb9e2de9dd422fcf2e9
 - ESLint está configurado para mantener un estilo de código consistente y evitar errores comunes.
