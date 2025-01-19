@@ -9,14 +9,14 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <h2>Lista de productos</h2>
+    <h2><%= __("Product List") %></h2>
     <% if (products.length > 0) { %>
       <ul>
         <% products.forEach(function(product) { %>
           <li>
-            <strong>Nombre:</strong> <%= product.name %> <br>
-            <strong>Precio:</strong> <%= product.price %> € <br>
-            <strong>Propietario:</strong> <%= product.owner %> <br>
+            <strong><%= __("Name:") %></strong> <%= product.name %> <br>
+            <strong><%= __("Price:") %></strong> <%= product.price %> € <br>
+            <strong><%= __("Owner:") %></strong> <%= product.owner %> <br>
           </li>
         <% }); %>
       </ul>

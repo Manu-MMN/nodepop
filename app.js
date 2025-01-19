@@ -10,6 +10,7 @@ import indexrouter from './routes/index.js'
 import usersRouter from './routes/users.js'
 import productRouter from './routes/products.js'
 import connectMongoose from './lib/conect-mongoose.js'; // Importar la función de conexión
+import i18n from "./lib/i18nConfigure.js"
 
 
 
@@ -18,6 +19,9 @@ await connectMongoose()
 console.log("conectado a mongoDB")
 
 const app = express()
+
+
+app.use(i18n.init)
 
 
 // view engine setup
